@@ -1,0 +1,81 @@
+students_dict = {}      
+students_list = []      
+unique_subjects = set()
+
+print("Welcome to the Student Data Organizer!")
+
+while True:
+    print("\nSelect an option:")
+    print("1. Add Student")
+    print("2. Display All Students")
+    print("3. Update Student Information")
+    print("4. Delete Student")
+    print("5. Display Subjects Offered")
+    print("6. Exit")
+
+    choice = input("Enter your choice: ")
+    if choice == '1':
+        print("\nEnter student details:")
+
+        sid = input("Student ID: ")
+        name = input("Name: ")
+        age = int(input("Age: "))
+        grade = input("Grade: ")
+        dob = input("Date of Birth: ")
+
+        subjects = input("Enter subjects (comma separated): ").split(',')
+
+        details = (sid, dob)
+
+        students_dict[sid] = {
+            "name": name,
+            "age": age,
+            "grade": grade,
+            "subjects": subjects,
+            "details": details
+        }
+
+        students_list.append(students_dict[sid])  
+
+        for sub in subjects:
+            unique_subjects.add(sub.strip())
+
+        print("Student added successfully!")
+    elif choice == '2':
+        if not students_dict:
+            print("No students found.")
+        else:
+            print("\n--- Student Details")
+            for sid, data in students_dict.items():
+                print(f"ID: {sid}, Name: {data['name']}, Age: {data['age']}, Grade: {data['grade']}")
+    elif choice == '3':
+        sid = input("Enter Student ID to update: ")
+        if sid in students_dict:
+            print("\nOnly Age and Subjects can be updated!")
+            new_age = int(input("Enter new age: "))
+            students_dict[sid]['age'] = new_age
+            new_subjects = input("Enter new subjects (comma separated): ").split(',')
+            students_dict[sid]['subjects'] = new_subjects
+            for sub in new_subjects:
+                unique_subjects.add(sub.strip())
+            print("Student updated successfully!")
+
+        else:
+            print("Student ID not found!")
+    elif choice == '4':
+        sid = input("Enter Student ID to delete: ")
+
+        if sid in students_dict:
+            del students_dict[sid]
+            print("Student deleted successfully!")
+        else:
+            print("Student ID not found!")
+    elif choice == '5':
+        print("\nUnique Subjects Offered:")
+        print(unique_subjects)
+    elif choice == '6':
+        print("Thank you for using the Student Data Organizer!")
+        break
+
+    else:
+        print("Invalid choice! Please try again.")
