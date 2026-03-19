@@ -1,0 +1,28 @@
+while(True):
+    print("1.generate pattern")
+    print("2.analyze numbers")
+    print("3. exit")
+    select=int(input("enter your choice:"))
+    match select : 
+        case 1:
+        
+            n=int(input("enter number of rows :"))
+            for i in range(1,n+1):
+                for j in range(1,i+1):
+                    print("*",end="")
+                print()
+
+        case 2:
+            start=int(input("enter starting value of range"))
+            end=int(input("enter end rage of number"))
+            add=0
+            for i in range(start,end):
+                if(i%2==0):
+                    print("Number",i,"is Even")
+                else:
+                    print("number",i,"is odd")
+                add+=i
+            print("the sum if all numbers from",start,"to",end,"is",add)
+        case 3:
+            print("Exiting the progrm Goodbye!")
+            break
