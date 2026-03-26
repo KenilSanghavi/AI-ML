@@ -1,0 +1,67 @@
+def fact(n):
+    if(n==1 or n==0):
+        return 1
+    else:
+        return n*fact(n-1)
+    
+def Stats(Stats):
+    print("Dataset Statistics:")
+    print("-Total elements:",len(Stats))
+    print("-Minimum element:",min(Stats))
+    print("-Maximum element:",max(Stats))
+    print("-Sum of all values:",sum(Stats))
+    print("-Average values:",sum(Stats)/len(Stats))
+
+while(True):
+    print("\nwelcome to data analyzer and transformer program")
+    print("\n Main menu:")
+    print("1.Input Data")
+    print("2.Display Data summary")
+    print("3.calculate factorial (Recursive)")
+    print("4.filter databy threshold(lambda function)")
+    print("5.Sort Data")
+    print("6.Display Dataset Statistics(return multiple values)")
+    print("7.exit program")
+    choice=int(input("enter your choice"))
+    match choice:
+        case 1:
+            numbers=list(map(int, input("Enter Data for 1D array (separated by spaces)").split()))
+
+            print("\nData has been stored succesfully")
+        case 2:
+            print("\nData Summary")
+            print("-Total elements:",len(numbers))
+            print("-Minimum element:",min(numbers))
+            print("-Maximum element:",max(numbers))
+            print("-Sum of all values:",sum(numbers))
+            print("-Average values:",sum(numbers)/len(numbers))
+
+        case 3:
+            num=int(input("\n Enter a number to calculate its factorial:"))
+            result=fact(num)
+            print("Facrorial of",num,"is:",result)
+        case 4:
+            threshold=int(input("Enter a threshold value to filter out data above this value:"))
+            ans=list(filter(lambda x:x>threshold,numbers))
+            print(*ans)
+        case 5:
+            print("Choosing Sorting Option")
+            print("1.Ascending")
+            print("2.Descending")
+
+            select=int(input("enter your choice"))
+            match select:
+                case 1:
+                    numbers.sort()
+                    print("Sorted Data in Ascending Order:")
+                    print(*numbers)
+                case 2:
+                    numbers.sort(reverse=True)
+                    print("Sorted Data in Descending Order:\n")
+                    print(*numbers)
+        case 6:
+            Stats(numbers)
+
+        case 7:
+            print("Thank you for using Data Analyzer and Transforer Program.Goodbye!")
+            break
