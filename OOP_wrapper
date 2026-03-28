@@ -1,0 +1,102 @@
+class Employee:
+    def __init__(self, employee_id=None, name=None, age=None, salary=None):
+        self._employee_id = employee_id  
+        self.name = name
+        self.age = age
+        self._salary = salary           
+
+    @property
+    def employee_id(self):
+        return self._employee_id
+    
+    @employee_id.setter
+    def employee_id(self, value):
+        self._employee_id = value
+    @property
+    def salary(self):
+        return self._salary
+    
+    @salary.setter
+    def salary(self, value):
+        self._salary = value
+
+    def display(self):
+        print(f"ID: {self._employee_id} | Name: {self.name} | Age: {self.age} | Salary: {self._salary}")
+
+    def __del__(self):
+        pass
+
+class Manager(Employee):
+    def __init__(self, employee_id, name, age, salary, department):
+        super().__init__(employee_id, name, age, salary)
+        self.department = department
+
+
+    def display(self):
+        print(f"ID: {self.employee_id} | Name: {self.name} | Age: {self.age} | Salary: {self.salary} | Dept: {self.department}")
+
+class Developer(Employee):
+    def __init__(self, employee_id, name, age, salary, programming_language):
+        super().__init__(employee_id, name, age, salary)
+        self.programming_language = programming_language
+
+
+    def display(self):
+        print(f"ID: {self.employee_id} | Name: {self.name} | Age: {self.age} | Salary: {self.salary} | Lang: {self.programming_language}")
+
+
+def main():
+    records = []
+    
+    while True:
+        print("\n--- Python OOP Project: Employee Management System ---")
+        print("Choose an operation:")
+        print("1. Create an Employee")
+        print("2. Create a Manager")
+        print("3. Create a Developer")
+        print("4. Show Details")
+        print("5. Exit")
+        
+        choice = input("\nEnter your choice: ")
+
+        if choice == '1':
+            e_id = input("Enter ID: ")
+            name = input("Enter Name: ")
+            age = input("Enter Age: ")
+            sal = input("Enter Salary: ")
+            records.append(Employee(e_id, name, age, sal))
+            print(f"Employee created: {name}")
+
+        elif choice == '2':
+            e_id = input("Enter ID: ")
+            name = input("Enter Name: ")
+            age = input("Enter Age: ")
+            sal = input("Enter Salary: ")
+            dept = input("Enter Department: ")
+            records.append(Manager(e_id, name, age, sal, dept))
+            print(f"Manager created: {name}")
+
+        elif choice == '3':
+            e_id = input("Enter ID: ")
+            name = input("Enter Name: ")
+            age = input("Enter Age: ")
+            sal = input("Enter Salary: ")
+            lang = input("Enter Programming Language: ")
+            records.append(Developer(e_id, name, age, sal, lang))
+            print(f"Developer created: {name}")
+
+        elif choice == '4':
+            print("\n--- Displaying All Records ---")
+            if not records:
+                print("No records found.")
+            for obj in records:
+                obj.display()
+
+        elif choice == '5':
+            print("Exiting program...")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
