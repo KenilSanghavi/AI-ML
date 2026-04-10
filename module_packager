@@ -1,0 +1,233 @@
+import datetime
+import time
+import random
+import string
+import uuid
+import math
+def datetime_operations():
+    while True:
+        print("\nDatetime and Time Operations:")
+        print("1. Display current date and time")
+        print("2. Calculate difference between two dates")
+        print("3. Format date into custom format")
+        print("4. Stopwatch")
+        print("5. Countdown Timer")
+        print("6. Back to Main Menu")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            now = datetime.datetime.now()
+            print("Current Date and Time:", now)
+
+        elif choice == "2":
+            d1 = input("Enter first date (YYYY-MM-DD): ")
+            d2 = input("Enter second date (YYYY-MM-DD): ")
+
+            date1 = datetime.datetime.strptime(d1, "%Y-%m-%d")
+            date2 = datetime.datetime.strptime(d2, "%Y-%m-%d")
+
+            diff = abs((date2 - date1).days)
+            print("Difference:", diff, "days")
+
+        elif choice == "3":
+            d = input("Enter date (YYYY-MM-DD): ")
+            date = datetime.datetime.strptime(d, "%Y-%m-%d")
+            print("Formatted:", date.strftime("%d-%m-%Y"))
+
+        elif choice == "4":
+            input("Press Enter to start stopwatch...")
+            start = time.time()
+            input("Press Enter to stop...")
+            end = time.time()
+            print("Elapsed Time:", round(end - start, 2), "seconds")
+
+        elif choice == "5":
+            sec = int(input("Enter seconds: "))
+            while sec:
+                print("Time left:", sec, "seconds", end="\r")
+                time.sleep(1)
+                sec -= 1
+            print("\nTime's up!")
+
+        elif choice == "6":
+            break
+
+        else:
+            print("Invalid choice!")
+def math_operations():
+    while True:
+        print("\nMathematical Operations:")
+        print("1. Calculate Factorial")
+        print("2. Solve Compound Interest")
+        print("3. Trigonometric Calculations")
+        print("4. Area of Geometric Shapes")
+        print("5. Back to Main Menu")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            n = int(input("Enter a number: "))
+            print("Factorial:", math.factorial(n))
+
+        elif choice == "2":
+            p = float(input("Enter principal amount: "))
+            r = float(input("Enter rate of interest (%): "))
+            t = float(input("Enter time (years): "))
+
+            ci = p * (1 + r / 100) ** t
+            print("Compound Interest:", round(ci, 2))
+
+        elif choice == "3":
+            angle = float(input("Enter angle in degrees: "))
+            rad = math.radians(angle)
+
+            print("sin:", math.sin(rad))
+            print("cos:", math.cos(rad))
+            print("tan:", math.tan(rad))
+
+        elif choice == "4":
+            print("1. Circle\n2. Rectangle")
+            shape = input("Choose shape: ")
+
+            if shape == "1":
+                r = float(input("Enter radius: "))
+                print("Area:", math.pi * r * r)
+            elif shape == "2":
+                l = float(input("Enter length: "))
+                b = float(input("Enter breadth: "))
+                print("Area:", l * b)
+
+        elif choice == "5":
+            break
+
+        else:
+            print("Invalid choice!")
+def random_data():
+    while True:
+        print("\nRandom Data Generation:")
+        print("1. Generate Random Number")
+        print("2. Generate Random List")
+        print("3. Create Random Password")
+        print("4. Generate Random OTP")
+        print("5. Back to Main Menu")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            print("Random Number:", random.randint(1, 100))
+
+        elif choice == "2":
+            n = int(input("Enter size of list: "))
+            lst = [random.randint(1, 100) for _ in range(n)]
+            print("Random List:", lst)
+
+        elif choice == "3":
+            length = int(input("Enter password length: "))
+            chars = string.ascii_letters + string.digits + string.punctuation
+            password = ''.join(random.choice(chars) for _ in range(length))
+            print("Generated Password:", password)
+
+        elif choice == "4":
+            otp = random.randint(1000, 9999)
+            print("OTP:", otp)
+
+        elif choice == "5":
+            break
+
+        else:
+            print("Invalid choice!")
+
+def generate_uuid():
+    print("\nGenerate Unique Identifiers:")
+    print("Generated UUID:", uuid.uuid4())
+
+def file_operations():
+    while True:
+        print("\nFile Operations:")
+        print("1. Create a new file")
+        print("2. Write to a file")
+        print("3. Read from a file")
+        print("4. Append to a file")
+        print("5. Back to Main Menu")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            fname = input("Enter file name: ")
+            open(fname, "w").close()
+            print("File created successfully!")
+
+        elif choice == "2":
+            fname = input("Enter file name: ")
+            data = input("Enter data to write: ")
+            with open(fname, "w") as f:
+                f.write(data)
+            print("Data written successfully!")
+
+        elif choice == "3":
+            fname = input("Enter file name: ")
+            with open(fname, "r") as f:
+                print("File Content:\n", f.read())
+
+        elif choice == "4":
+            fname = input("Enter file name: ")
+            data = input("Enter data to append: ")
+            with open(fname, "a") as f:
+                f.write(data)
+            print("Data appended successfully!")
+
+        elif choice == "5":
+            break
+
+        else:
+            print("Invalid choice!")
+
+
+def explore_module():
+    module_name = input("Enter module name to explore: ")
+    module = __import__(module_name)
+    print("Available Attributes:\n", dir(module))
+
+def main():
+    while True:
+        print("Welcome to Multi-utility Toolkit")
+        print("Choose an option:")
+        print("1.Datetime and Time operations")
+        print("2.Mathematical Operations")
+        print("3.Random Data Generations")
+        print("4.Generate Unique Identifiers")
+        print("5.File Operations(Custom module)")
+        print("6.Explore Module attributes(dir())")
+        print("7.Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            datetime_operations()
+
+        elif choice == "2":
+            math_operations()
+
+        elif choice == "3":
+            random_data()
+
+        elif choice == "4":
+            generate_uuid()
+
+        elif choice == "5":
+            file_operations()
+
+        elif choice == "6":
+            explore_module()
+
+        elif choice == "7":
+            print("Exiting... Goodbye!")
+            break
+
+        else:
+            print("Invalid choice!")
+
+
+# Run program
+main()
