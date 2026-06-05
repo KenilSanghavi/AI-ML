@@ -1,0 +1,82 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import numpy as np
+
+df = pd.read_csv("2019.csv")
+df.columns = df.columns.str.strip()
+
+print("Shape:", df.shape)
+print("\nFirst 5 rows:")
+print(df.head())
+print("\nBasic Statistics:")
+print(df.describe())
+print("\nMissing values:")
+print(df.isnull().sum())
+
+
+sns.set_theme(style="whitegrid", palette="muted")
+features = ["GDP per capita", "Social support",
+            "Healthy life expectancy", "Freedom to make life choices",
+            "Generosity", "Perceptions of corruption"]
+
+fig1, axes = plt.subplots(1, 2, figsize=(16, 6))
+fig1.suptitle("World Happiness Report 2019 – Top & Bottom 10 Countries",
+              fontsize=15, fontweight="bold", y=1.01)
+
+top10 = df.nlargest(10, "Score")
+bot10 = df.nsmallest(10, "Score")
+
+for ax, data, title, color in zip(
+        axes,
+        [top10, bot10],
+        ["Top 10 Happiest Countries", "Bottom 10 Least Happy Countries"],
+        ["#2ecc71", "#e74c3c"]):
+    bars = ax.barh(data["Country or region"], data["Score"],
+                   color=color, edgecolor="white", linewidth=0.6)
+    ax.set_title(title, fontsize=13, fontweight="bold")
+    ax.set_xlabel("Happiness Score", fontsize=11)
+    ax.invert_yaxis()
+    ax.bar_label(bars, fmt="%.3f", padding=4, fontsize=9)
+    ax.set_xlim(0, data["Score"].max() * 1.15)
+
+plt.tight_layout()
+plt.show()
+
+fig2, ax = plt.subplots(figsize=(9, 7))
+corr = df[["Score"] + features].corr()
+mask = np.triu(np.ones_like(corr, dtype=bool))
+sns.heatmap(corr, mask=mask,fmt=".2f", cmap="coolwarm",
+            vmin=-1, vmax=1, center=0, square=True,
+            linewidths=0.5, ax=ax)
+ax.set_title("Correlation Matrix – Happiness Score vs Key Factors",
+             fontsize=13, fontweight="bold", pad=12)
+plt.tight_layout()
+plt.show()
+
+
+fig4, axes = plt.subplots(1, 2, figsize=(14, 5))
+fig4.suptitle("Distribution of Happiness Scores", fontsize=14, fontweight="bold")
+
+
+sns.histplot(df["Score"], bins=20, kde=True, color="#3498db",
+             edgecolor="white", ax=axes[0])
+axes[0].axvline(df["Score"].mean(), color="red", linestyle="--",
+                linewidth=1.8, label=f"Mean: {df['Score'].mean():.2f}")
+axes[0].axvline(df["Score"].median(), color="green", linestyle="--",
+                linewidth=1.8, label=f"Median: {df['Score'].median():.2f}")
+axes[0].set_title("Histogram with KDE")
+axes[0].set_xlabel("Happiness Score")
+axes[0].legend()
+
+df_box = df[features].melt(var_name="Factor", value_name="Value")
+sns.boxplot(data=df_box, x="Factor", y="Value",palette="Set2", ax=axes[1])
+axes[1].set_xticklabels(axes[1].get_xticklabels(),
+                        rotation=25, ha="right", fontsize=8)
+axes[1].set_title("Distribution of Each Factor")
+axes[1].set_xlabel("")
+
+plt.tight_layout()
+plt.savefig("fig4_distributions.png", bbox_inches="tight")
+plt.show()
+print("Saved: fig4_distributions.png")
