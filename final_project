@@ -77,6 +77,5 @@ axes[1].set_title("Distribution of Each Factor")
 axes[1].set_xlabel("")
 
 plt.tight_layout()
-plt.savefig("fig4_distributions.png", bbox_inches="tight")
 plt.show()
-print("Saved: fig4_distributions.png")
+
