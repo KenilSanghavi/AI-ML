@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 
-df = pd.read_csv("2019.csv")
+df = pd.read_csv("task_final_project/2019.csv")
 df.columns = df.columns.str.strip()
 
 print("Shape:", df.shape)
@@ -16,24 +16,16 @@ print(df.isnull().sum())
 
 
 sns.set_theme(style="whitegrid", palette="muted")
-features = ["GDP per capita", "Social support",
-            "Healthy life expectancy", "Freedom to make life choices",
-            "Generosity", "Perceptions of corruption"]
+features = ["GDP per capita", "Social support","Healthy life expectancy", "Freedom to make life choices","Generosity", "Perceptions of corruption"]
 
 fig1, axes = plt.subplots(1, 2, figsize=(16, 6))
-fig1.suptitle("World Happiness Report 2019 – Top & Bottom 10 Countries",
-              fontsize=15, fontweight="bold", y=1.01)
+fig1.suptitle("World Happiness Report 2019 – Top & Bottom 10 Countries",fontsize=15, fontweight="bold", y=1.01)
 
 top10 = df.nlargest(10, "Score")
 bot10 = df.nsmallest(10, "Score")
 
-for ax, data, title, color in zip(
-        axes,
-        [top10, bot10],
-        ["Top 10 Happiest Countries", "Bottom 10 Least Happy Countries"],
-        ["#2ecc71", "#e74c3c"]):
-    bars = ax.barh(data["Country or region"], data["Score"],
-                   color=color, edgecolor="white", linewidth=0.6)
+for ax, data, title, color in zip(axes,[top10, bot10],["Top 10 Happiest Countries", "Bottom 10 Least Happy Countries"],["#2ecc71", "#e74c3c"]):
+    bars = ax.barh(data["Country or region"], data["Score"],color=color, edgecolor="white", linewidth=0.6)
     ax.set_title(title, fontsize=13, fontweight="bold")
     ax.set_xlabel("Happiness Score", fontsize=11)
     ax.invert_yaxis()
@@ -43,36 +35,39 @@ for ax, data, title, color in zip(
 plt.tight_layout()
 plt.show()
 
-fig2, ax = plt.subplots(figsize=(9, 7))
-corr = df[["Score"] + features].corr()
-mask = np.triu(np.ones_like(corr, dtype=bool))
-sns.heatmap(corr, mask=mask,fmt=".2f", cmap="coolwarm",
-            vmin=-1, vmax=1, center=0, square=True,
-            linewidths=0.5, ax=ax)
-ax.set_title("Correlation Matrix – Happiness Score vs Key Factors",
-             fontsize=13, fontweight="bold", pad=12)
+fig2, axes = plt.subplots(2, 3, figsize=(16, 10))
+fig2.suptitle("Happiness Score vs Key Contributing Factors",fontsize=15, fontweight="bold", y=1.01)
+
+colors = ["#3498db", "#e74c3c", "#2ecc71", "#9b59b6", "#f39c12", "#1abc9c"]
+for ax, feat, color in zip(axes.flat, features, colors):
+    ax.scatter(df[feat], df["Score"], alpha=0.65, color=color,edgecolors="white", linewidth=0.4, s=55)
+    m, b = np.polyfit(df[feat], df["Score"], 1)
+    x_range = np.linspace(df[feat].min(), df[feat].max(), 200)
+    ax.plot(x_range, m * x_range + b, color="black",linewidth=1.8, linestyle="--", label=f"r={df[feat].corr(df['Score']):.2f}")
+    ax.set_xlabel(feat, fontsize=10)
+    ax.set_ylabel("Happiness Score", fontsize=10)
+    ax.set_title(f"Score vs {feat}", fontsize=11, fontweight="bold")
+    ax.legend(fontsize=9)
+
 plt.tight_layout()
+plt.savefig("fig3_scatter_plots.png", bbox_inches="tight")
 plt.show()
+print("Saved: fig3_scatter_plots.png")
+
+fig3, axes = plt.subplots(1, 2, figsize=(14, 5))
+fig3.suptitle("Distribution of Happiness Scores", fontsize=14, fontweight="bold")
 
 
-fig4, axes = plt.subplots(1, 2, figsize=(14, 5))
-fig4.suptitle("Distribution of Happiness Scores", fontsize=14, fontweight="bold")
-
-
-sns.histplot(df["Score"], bins=20, kde=True, color="#3498db",
-             edgecolor="white", ax=axes[0])
-axes[0].axvline(df["Score"].mean(), color="red", linestyle="--",
-                linewidth=1.8, label=f"Mean: {df['Score'].mean():.2f}")
-axes[0].axvline(df["Score"].median(), color="green", linestyle="--",
-                linewidth=1.8, label=f"Median: {df['Score'].median():.2f}")
+sns.histplot(df["Score"], bins=20, kde=True, color="#3498db",edgecolor="white", ax=axes[0])
+axes[0].axvline(df["Score"].mean(), color="red", linestyle="--",linewidth=1.8, label=f"Mean: {df['Score'].mean():.2f}")
+axes[0].axvline(df["Score"].median(), color="green", linestyle="--",linewidth=1.8, label=f"Median: {df['Score'].median():.2f}")
 axes[0].set_title("Histogram with KDE")
 axes[0].set_xlabel("Happiness Score")
 axes[0].legend()
 
 df_box = df[features].melt(var_name="Factor", value_name="Value")
 sns.boxplot(data=df_box, x="Factor", y="Value",palette="Set2", ax=axes[1])
-axes[1].set_xticklabels(axes[1].get_xticklabels(),
-                        rotation=25, ha="right", fontsize=8)
+axes[1].set_xticklabels(axes[1].get_xticklabels(), rotation=25, ha="right", fontsize=8)
 axes[1].set_title("Distribution of Each Factor")
 axes[1].set_xlabel("")
 
