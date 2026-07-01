@@ -1,0 +1,63 @@
+FINAL PROJECT 
+Q1:CRUD OPERATIONS
+
+INSERT INTO Students
+VALUES (11,'Rahul','Patel','rahul@gmail.com','2004-02-15','2024-06-10');
+
+INSERT INTO Courses
+VALUES (6,'Python Programming',1,4);
+
+INSERT INTO Instructors
+VALUES (3,'David','Miller','david@univ.com',1);
+
+INSERT INTO Enrollments
+VALUES (11,11,6,'2024-06-12');
+
+SELECT * FROM Students;
+SELECT * FROM Courses;
+SELECT * FROM Instructors;
+SELECT * FROM Enrollments;
+
+UPDATE Students
+SET Email='rahul123@gmail.com'
+WHERE StudentID=11;
+
+UPDATE Courses
+SET Credits=5
+WHERE CourseID=6;
+
+UPDATE Instructors
+SET LastName='Williams'
+WHERE InstructorID=3;
+
+UPDATE Enrollments
+SET CourseID=2
+WHERE EnrollmentID=11;
+
+DELETE FROM Enrollments
+WHERE EnrollmentID=11;
+
+DELETE FROM Students
+WHERE StudentID=11;
+
+DELETE FROM Courses
+WHERE CourseID=6;
+
+DELETE FROM Instructors
+WHERE InstructorID=3;
+
+
+Q2:SELECT * FROM Students WHERE YEAR(EnrollmentDate) > 2022;
+Q3:SELECT *FROM Courses JOIN Departments ON Courses.DepartmentID = Departments.DepartmentID WHERE Departments.DepartmentName = 'Mathematics'LIMIT 5;
+Q4:SELECT CourseID, COUNT(StudentID) AS TotalStudents FROM Enrollments GROUP BY CourseID HAVING COUNT(StudentID) > 5;
+Q5:SELECT Students.StudentID,Students.FirstName,Students.LastName FROM Students JOIN Enrollments ON Students.StudentID = Enrollments.StudentID JOIN Courses ON Enrollments.CourseID =  Courses.CourseID  WHERE Courses.CourseName IN ('Introduction to SQL','Data Structures') GROUP BY Students.StudentID, Students.FirstName, Students.LastName HAVING COUNT(DISTINCT Courses.CourseName) = 2;
+Q6:select distinct students.studentid,students.firstname,students.lastname from students join enrollments on students.studentid=enrollments.studentid join courses on enrollments.courseid=courses.courseid where courses.coursename in ('Introduction to SQL','Data Structures');
+Q7:select avg(credits) as averagecredits from courses;
+Q8:select departments.departmentname,count(distinct enrollments.studentid) as totalstudents from departments join courses on departments.departmentid=courses.departmentid join enrollments on courses.courseid=enrollments.courseid group by departments.departmentname;
+Q10:select students.studentid,students.firstname,students.lastname,courses.coursename from students inner join enrollments on students.studentid=enrollments.studentid inner join courses on enrollments.courseid=courses.courseid;
+Q11:select students.studentid,students.firstname,students.lastname,courses.coursename from students left join enrollments on students.studentid=enrollments.studentid left join courses on enrollments.courseid=courses.courseid;
+Q12:select * from students where studentid in (select studentid from enrollments where courseid in (select courseid from enrollments group by courseid having count(studentid)>10));
+Q13:select studentid,firstname,year(enrollmentdate) as enrollmentyear from students;
+Q14:select concat(firstname,' ',lastname) as instructorname from instructors;
+Q15:select courseid,count(studentid) as studentsenrolled,sum(count(studentid)) over(order by courseid) as runningtotal from enrollments group by courseid;
+Q16:select studentid,firstname,lastname,case when enrollmentdate<=date_sub(curdate(),interval 4 year) then 'Senior' else 'Junior' end as studentlevel from students;		
