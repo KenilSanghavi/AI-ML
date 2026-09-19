@@ -40,7 +40,7 @@ The project provides interactive visualizations and filters that allow users to 
 ## 📁 Project File
 
 ```text
-Project_2.pbix
+PR2_kenil.pbix
 ```
 
 The `.pbix` file contains the complete Power BI report, data model, visualizations, calculated fields, filters, and dashboard pages.
