@@ -307,9 +307,10 @@ Header: *Compensation · Salary Bands · Training Investment*
 | 5 | Slicer | – | Career_Level_Band |
 | 6 | Slicer | – | SalaryBand |
 
-![Page 1](images/page1.png)
-![Page 2](images/page2.png)
-![Page 3](images/page3.png)
+<img width="1150" height="650" alt="image" src="https://github.com/user-attachments/assets/d6b0f7bd-7969-4592-8737-ecbee8792cbb" />
+<img width="1150" height="657" alt="image" src="https://github.com/user-attachments/assets/84314316-3134-43b1-9d11-09e9cec0866c" />
+<img width="1128" height="611" alt="image" src="https://github.com/user-attachments/assets/779103d4-32be-4c7f-9b06-d4a0b00fc65c" />
+
 
 ---
 
