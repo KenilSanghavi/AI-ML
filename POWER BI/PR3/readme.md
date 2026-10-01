@@ -1,103 +1,187 @@
-# 🛒 Olist E-Commerce Analytics — Power BI Dashboard
+# Olist Brazilian E-Commerce – Power BI Data Modelling & Dashboard (PR3)
 
-An interactive Power BI report analysing Brazilian e-commerce data from **Olist**. It covers sales performance, geographic distribution of customers and sellers, payment behaviour, and customer satisfaction.
+A Power BI project that builds a star-schema data model and a 3-page interactive report on the Olist Brazilian E-Commerce dataset.
 
----
-
-## 📌 Project Overview
-
-| Item | Details |
-|---|---|
-| **Tool** | Microsoft Power BI Desktop |
-| **Domain** | E-commerce / Retail Analytics |
-| **Dataset** | Olist Brazilian E-Commerce (Kaggle) |
-| **Currency** | Brazilian Real (R$) |
-| **Report file** | `PR3_kenil.pbix` |
+**Author:** Kenil · [GitHub](https://github.com/KenilSanghavi)
 
 ---
 
-## 📊 Report Pages
+## Project Links
 
-### 1. Sales Overview
-- KPI cards: **Total Orders**, **Total Revenue (R$)**, **Average Order Value (R$)**, **Average Customer Rating**
-- Top 10 product categories by revenue
-- Order trend over time (Year → Quarter → Month drill-down)
-- Slicers: Year, Order Status, Product Category
+| Item | Link |
+|------|------|
+| Dataset (Kaggle) | https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce |
+| Demo video + `.pbix` file (Google Drive) | PASTE_YOUR_DRIVE_LINK_HERE |
 
-### 2. Geographic Analysis
-- Map of order distribution across Brazilian states
-- Seller revenue by state and city
-- Year slicer for time-based filtering
-
-### 3. Payments and Reviews
-- Payment value by payment type (donut chart)
-- Payment value by type and year (matrix)
-- Top 10 product categories by review score
+> The Drive folder is set to "Anyone with the link – Viewer". The `.pbix` is about 66 MB, so it is hosted on Drive instead of GitHub.
 
 ---
 
-## 🗂️ Data Model
+## Tools Used
 
-Star schema with fact tables at the centre and dimension tables around them.
-
-**Fact tables**
-- `FactOrderItems` — items sold, price, freight
-- `FactPayments` — payment type and value
-- `FactReviews` — customer review scores
-
-**Dimension tables**
-- `DimOrders`, `DimCustomer`, `DimSellers`, `DimProduct`, `DimGeolocation`, `DimDate`
-
-![Data Model](screenshots/04_data_model.png)
+- Power BI Desktop
+- Power Query (M language)
+- DAX
 
 ---
 
-## 🧮 Key Measures
+## Dataset
 
-| Measure | Description |
-|---|---|
-| Total Orders | Count of unique orders |
-| Total Revenue | Sum of item price |
-| Avg Order Value | Revenue divided by number of orders |
-| Avg Customer Rating | Average review score |
+The Olist dataset has 9 CSV files covering orders, items, customers, sellers, products, payments, reviews, geolocation and category translation. All 9 files were loaded into Power BI Desktop and renamed to clean table names:
 
----
+`FactOrderItems`, `DimOrders`, `DimCustomers`, `DimProducts`, `DimSellers`, `FactPayments`, `FactReviews`, `DimGeolocation`, `CategoryTranslation`
 
-## 🚀 How to Use
-
-1. Download `PR3_kenil.pbix` (see **Download** below).
-2. Open it with [Power BI Desktop](https://powerbi.microsoft.com/desktop/) (free, Windows only).
-3. Use the slicers on each page to filter by year, category, or order status.
-
+`product_category_name_translation` was merged into `DimProducts` as the **Product_Category_EN** column.
 
 ---
 
-## 💡 Key Insights
+## Data Model (Star Schema)
 
-*(Fill these in from your own findings, for example:)*
-- Which product categories generate the most revenue?
-- Which states have the most orders?
-- Which payment method is most used?
-- How has order volume changed over time?
+![Star Schema Diagram](images/star_schema.png)
+
+![Model View](images/model_view.png)
+
+### Fact Table
+
+**FactOrderItems** – holds the numeric values `price` and `freight_value` (used as measures) and the foreign keys `order_id`, `product_id` and `seller_id`.
+
+### Dimension Tables
+
+| Table | Purpose |
+|-------|---------|
+| DimOrders | Order details: status, purchase date, delivery date |
+| DimCustomers | Customer city and state |
+| DimProducts | Product details and English category name |
+| DimSellers | Seller city and state |
+| DimDate | Calendar table for time analysis |
+
+`FactPayments` and `FactReviews` are additional fact tables linked to `DimOrders`.
+
+### DimDate
+
+Built in Power Query with M code. Columns: `Date`, `Year`, `Quarter`, `Month_Num`, `Month_Name`, `Weekday`, `Year_Quarter`.
+It is marked as the Date Table (Table Tools → Mark as Date Table), and `Month_Name` is sorted by `Month_Num`.
 
 ---
 
-## 🛠️ Skills Demonstrated
+## Relationships
 
-- Data modelling (star schema, relationships)
-- DAX measures
-- Data cleaning and transformation in Power Query
-- Interactive dashboard design (slicers, drill-down, maps)
+### 7 Active Relationships (Many-to-One, Single direction)
+
+| # | From (Many) | To (One) |
+|---|-------------|----------|
+| 1 | FactOrderItems[order_id] | DimOrders[order_id] |
+| 2 | FactOrderItems[product_id] | DimProducts[product_id] |
+| 3 | FactOrderItems[seller_id] | DimSellers[seller_id] |
+| 4 | FactPayments[order_id] | DimOrders[order_id] |
+| 5 | FactReviews[order_id] | DimOrders[order_id] |
+| 6 | DimOrders[customer_id] | DimCustomers[customer_id] |
+| 7 | DimOrders[order_purchase_date] | DimDate[Date] |
+
+### 1 Inactive Relationship
+
+| From (Many) | To (One) | Why inactive |
+|-------------|----------|--------------|
+| DimOrders[order_delivered_customer_date] | DimDate[Date] | Only one relationship between two tables can be active. It is activated in a measure with `USERELATIONSHIP()` when delivery-date analysis is needed. |
+
+### Date column note
+
+`order_purchase_timestamp` contains date and time, while `DimDate[Date]` contains date only, so most rows did not match and 2016 showed blank. A date-only column was added in Power Query, `Date.From([order_purchase_timestamp])`, and the relationship uses that column.
+
+### Bi-directional filtering
+
+Cross-filter direction decides which way a filter flows between tables. With **Single**, the filter flows from the "one" side to the "many" side only. With **Both**, it flows in both directions.
+
+Risks of Both:
+- Ambiguous filter paths when several routes exist between tables
+- Slower performance on large models
+- Totals that change unexpectedly depending on which slicers are used
+- Circular dependencies
+
+For this reason Single direction is used by default, and Both is used only where it is needed, as shown in the video.
 
 ---
 
-## 👤 Author
+## Model Settings
 
-**Kenil Sanghavi**
-GitHub: [@KenilSanghavi]
+- Technical fields hidden from Report View: zip code prefixes, product length/width/height, `order_item_id`
+- Currency format **R$ (Brazilian Real)** applied to `price`, `freight_value` and `payment_value`
+- Geography data categories set for `customer_city`, `customer_state`, `seller_city`, `seller_state`
+
+### Hierarchies (4)
+
+| Hierarchy | Levels |
+|-----------|--------|
+| Date Hierarchy | Year → Quarter → Month_Name |
+| Product Hierarchy | Product_Category_EN → product_id |
+| Seller Location | seller_state → seller_city |
+| Customer Location | customer_state → customer_city |
+
+### Measures
+
+```DAX
+Total Orders = DISTINCTCOUNT(DimOrders[order_id])
+Revenue      = SUM(FactOrderItems[price])
+Avg Review Score = AVERAGE(FactReviews[review_score])
+```
 
 ---
 
-## 📄 Data Source
+## Report Pages
 
-Olist Brazilian E-Commerce Public Dataset, available on Kaggle. Used here for educational purposes.
+A built-in theme is applied consistently across all 3 pages. A **report-level filter** (`order_status = delivered`) applies to every page.
+
+### Page 1 – Sales Overview
+
+KPI cards, line chart of orders by year (with drill-down through the Date Hierarchy), bar chart, map, matrix and slicers. A text box describes the model.
+
+### Page 2 – Payments & Reviews
+
+Header: *Payment Methods · Customer Satisfaction*
+
+- Matrix of payment type × year with conditional formatting
+- Donut chart of payment type mix (% of total `payment_value`)
+- Bar chart of average review score by product category
+- Year slicer
+
+### Page 3 – Geographic Analysis
+
+Header: *Geographic Distribution — Customers & Sellers*
+
+- Map of orders by customer state (Customer Location hierarchy)
+- Clustered bar chart of the top 10 seller cities by revenue (Seller Location hierarchy)
+- Clustered column chart of revenue by seller state
+- Year slicer
+
+Screenshots:
+
+| Sales Overview | Payments & Reviews | Geographic Analysis |
+|:---:|:---:|:---:|
+| ![Page 1](images/page1.png) | ![Page 2](images/page2.png) | ![Page 3](images/page3.png) |
+
+---
+
+## Demo Video
+
+Watch it here: PASTE_YOUR_VIDEO_LINK_HERE
+
+The video (about 5–10 minutes, face and screen) covers:
+- Model View walkthrough
+- Bi-directional filter demonstration and its risks
+- Filter flow from a slicer through a dimension to the fact table
+- Drill-down on the line chart using the Date Hierarchy
+
+---
+
+## Repository Structure
+
+```
+├── README.md
+├── images/
+│   ├── star_schema.png
+│   ├── model_view.png
+│   ├── page1.png
+│   ├── page2.png
+│   └── page3.png
+└── (PR3_kenil.pbix and video hosted on Google Drive)
+```
