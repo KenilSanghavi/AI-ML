@@ -333,7 +333,6 @@ Header: *Compensation · Salary Bands · Training Investment*
 ```
 ├── README.md
 ├── images/
-│   ├── model_view.png
 │   ├── page1.png
 │   ├── page2.png
 │   └── page3.png
