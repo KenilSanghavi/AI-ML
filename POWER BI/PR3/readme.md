@@ -167,18 +167,6 @@ Screenshots:
 
 ---
 
-## Demo Video
-
-Watch it here: PASTE_YOUR_VIDEO_LINK_HERE
-
-The video (about 5–10 minutes, face and screen) covers:
-- Model View walkthrough
-- Bi-directional filter demonstration and its risks
-- Filter flow from a slicer through a dimension to the fact table
-- Drill-down on the line chart using the Date Hierarchy
-
----
-
 ## Repository Structure
 
 ```
