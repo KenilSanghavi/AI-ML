@@ -37,9 +37,11 @@ The Olist dataset has 9 CSV files covering orders, items, customers, sellers, pr
 
 ## Data Model (Star Schema)
 
-![Star Schema Diagram](images/star_schema.png)
+<img width="1166" height="732" alt="image" src="https://github.com/user-attachments/assets/6270eee2-8f70-4e4b-bf03-5badab44cb75" />
 
-![Model View](images/model_view.png)
+
+<img width="1033" height="727" alt="image" src="https://github.com/user-attachments/assets/d1a16e9a-878f-4e0d-91b4-79f88ed06587" />
+
 
 ### Fact Table
 
