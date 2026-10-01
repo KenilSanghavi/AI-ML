@@ -158,13 +158,12 @@ Header: *Geographic Distribution — Customers & Sellers*
 Screenshots:
 
 | Sales Overview |
-|:---:|:---:|:---:|
-|<img width="1336" height="697" alt="image" src="https://github.com/user-attachments/assets/dfe81c9e-2f92-437f-9849-74a8444fe3f9" />
+|<img width="1336" height="697" alt="image" src="https://github.com/user-attachments/assets/dfe81c9e-2f92-437f-9849-74a8444fe3f9" />|
 | Payments & Reviews |
- |<img width="1322" height="682" alt="image" src="https://github.com/user-attachments/assets/e55c06c4-24f3-49ea-bb6d-00d001928b8f" />
+ |<img width="1322" height="682" alt="image" src="https://github.com/user-attachments/assets/e55c06c4-24f3-49ea-bb6d-00d001928b8f" />|
  | Geographic Analysis |
- |<img width="1332" height="655" alt="image" src="https://github.com/user-attachments/assets/d9e852fa-2c6b-455a-a1d6-c921d05221e2" />
- |
+ |<img width="1332" height="655" alt="image" src="https://github.com/user-attachments/assets/d9e852fa-2c6b-455a-a1d6-c921d05221e2" />|
+ 
 
 ---
 
