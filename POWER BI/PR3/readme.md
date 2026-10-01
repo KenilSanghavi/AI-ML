@@ -11,7 +11,7 @@ A Power BI project that builds a star-schema data model and a 3-page interactive
 | Item | Link |
 |------|------|
 | Dataset (Kaggle) | https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce |
-| Demo video + `.pbix` file (Google Drive) | PASTE_YOUR_DRIVE_LINK_HERE |
+| Demo video + `.pbix` file (Google Drive) | (https://drive.google.com/drive/folders/13eK4r5fLp0oOvz_RQBEIFWNLDQnH-iZS?usp=drive_link) |
 
 > The Drive folder is set to "Anyone with the link – Viewer". The `.pbix` is about 66 MB, so it is hosted on Drive instead of GitHub.
 
