@@ -10,8 +10,8 @@ An interactive 5-page Power BI report that analyses 3 million US domestic flight
 
 | Resource | Link |
 |---|---|
-| 📊 Power BI File (`PR5_kenil.pbix`) | [Download from Google Drive](PASTE_POWER_BI_FILE_LINK_HERE) |
-| 🎥 Demo Video | [Watch on Google Drive](PASTE_VIDEO_LINK_HERE) |
+| 📊 Power BI File (`PR5_kenil.pbix`) | https://drive.google.com/drive/folders/1FNLkSvE7ynviiIW_JwPBG-hOUS0vWEgh?usp=drive_link |
+| 🎥 Demo Video | https://drive.google.com/drive/folders/1FNLkSvE7ynviiIW_JwPBG-hOUS0vWEgh?usp=drive_link |
 
 > Make sure both Drive links are set to **"Anyone with the link → Viewer"**.
 
@@ -20,25 +20,32 @@ An interactive 5-page Power BI report that analyses 3 million US domestic flight
 ## 🖼️ Dashboard Preview
 
 ### Overview
-![Overview Page](screenshots/01_overview.png)
+<img width="1283" height="726" alt="image" src="https://github.com/user-attachments/assets/55cbc8ca-3e5f-45c9-b140-bd5f1568e68e" />
+
 
 ### Airline Performance
-![Airline Performance Page](screenshots/02_airline_performance.png)
+<img width="1291" height="737" alt="image" src="https://github.com/user-attachments/assets/4878009f-5dc8-4383-a5a4-8d2e51d6ccce" />
+
 
 ### Route & Airport Map
-![Route and Airport Map Page](screenshots/03_route_airport_map.png)
+<img width="1292" height="620" alt="image" src="https://github.com/user-attachments/assets/f0f40ca0-fff6-4a7c-8ca1-5101105e8b95" />
+
 
 ### Drill-Through Detail
-![Drill Through Detail Page](screenshots/04_drill_through_detail.png)
+<img width="1282" height="743" alt="image" src="https://github.com/user-attachments/assets/1a16d25f-7c68-4eaa-9fae-d4a5da7e6557" />
+
 
 ### Trends & Forecast
-![Trends and Forecast Page](screenshots/05_trends_forecast.png)
+<img width="1305" height="730" alt="image" src="https://github.com/user-attachments/assets/59752014-1a73-4e49-9bb2-c56306e615dd" />
+
 
 ### Custom Tooltip (Airport)
-![Tooltip Airport](screenshots/06_tooltip_airport.png)
+<img width="642" height="488" alt="image" src="https://github.com/user-attachments/assets/14bf8699-40f8-428b-bd3f-3ef33f50dc0a" />
+
 
 ### Mobile Layout
-![Mobile Layout](screenshots/07_mobile_layout.png)
+<img width="440" height="651" alt="image" src="https://github.com/user-attachments/assets/3bd050d4-8361-47a7-9533-17985fde36ee" />
+
 
 ---
 
