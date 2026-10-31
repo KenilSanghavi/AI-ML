@@ -90,19 +90,19 @@ The Power BI report has 3 pages with a shared Year slicer, plus state and catego
 ### Page 1: Overview
 KPI cards for total revenue, total orders, total customers, AOV, profit margin and churn rate, with monthly revenue, top 5 states and revenue by category.
 
-![Overview]<img width="1477" height="811" alt="image" src="https://github.com/user-attachments/assets/3a26b1dc-db26-42a7-ae67-76e4dcd81e21" />
+<img width="1477" height="811" alt="image" src="https://github.com/user-attachments/assets/3a26b1dc-db26-42a7-ae67-76e4dcd81e21" />
 
 
 ### Page 2: Customers and Products
 Top 10 customers, spending by gender, active vs churned customers, new vs returning customers, top 10 products and profit margin by product.
 
-![Customers and Products]<img width="1387" height="802" alt="image" src="https://github.com/user-attachments/assets/6b8b7e9a-0212-4ea7-b5a5-67bbba8900d6" />
+<img width="1387" height="802" alt="image" src="https://github.com/user-attachments/assets/6b8b7e9a-0212-4ea7-b5a5-67bbba8900d6" />
 
 
 ### Page 3: Shipping and Fulfilment
 Average shipping days, delayed %, total shipping cost, cost by method, delayed vs on-time by method and delay rate by method.
 
-![Shipping]<img width="1372" height="802" alt="image" src="https://github.com/user-attachments/assets/59c684ca-4d99-41ff-bf39-5320985f0251" />
+<img width="1372" height="802" alt="image" src="https://github.com/user-attachments/assets/59c684ca-4d99-41ff-bf39-5320985f0251" />
 
 
 ---
