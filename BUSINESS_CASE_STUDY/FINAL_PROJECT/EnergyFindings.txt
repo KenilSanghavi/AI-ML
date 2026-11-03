@@ -1,0 +1,6 @@
+WattWatch - Energy Findings
+1. Central is the energy hotspot: 6.26M kWh total (about 29% of the city) and 73.4 kWh average daily use per reading, roughly 35% above every other zone. It also has the highest estimated cost (about Rs 49.5M).
+2. Central is also the least efficient zone: rank 1 for both usage and outages, with an outage rate of 13% of readings (average 6.55 outage minutes) versus 4.8-8.5% elsewhere. Action: prioritise grid upgrades and demand-management programs there first.
+3. Industrial consumers dominate demand: 11.3M kWh (52% of all consumption) from only about 12% of meters. The top 5 industrial meters (e.g. MTR0188, MTR0821) are almost all in Central. Action: offer these customers time-of-use tariffs and efficiency audits.
+4. Consumption peaks in summer: July is the highest month (2.06M kWh) against February at 1.55M kWh (about 32% higher), with a second smaller rise in December. Action: schedule maintenance outside May-August and prepare capacity for the summer peak.
+5. Weekday vs weekend: Commercial and Industrial peak usage drops about 44% on weekends (e.g. Industrial 23.6 to 13.2 kWh), while Residential rises slightly (1.44 to 1.66 kWh). Action: shift flexible industrial load to weekends and apply weekday peak pricing.
