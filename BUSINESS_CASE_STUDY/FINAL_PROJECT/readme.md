@@ -154,12 +154,7 @@ Faulty % = DIVIDE(CALCULATE(COUNTROWS(SmartCityEnergy), SmartCityEnergy[MeterSta
 
 ## 📸 Dashboard Preview
 
-Add a screenshot of your dashboard here:
-
-```
 <img width="1167" height="805" alt="image" src="https://github.com/user-attachments/assets/b53e5449-259e-4102-9a27-473e751727ba" />
-
-```
 
 ---
 
